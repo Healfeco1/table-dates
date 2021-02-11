@@ -1,0 +1,42 @@
+body{
+    /* background-color: lightblue; */
+    text-transform: lowercase;
+}
+.table{
+    /* background-color: lightcoral; */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.table-calendar{
+    /* background-color: blanchedalmond; */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;   
+    font-size: 12px;
+}
+#calendar-body{
+    /* border: 1px dashed gray */
+}
+.table-calendar td {
+    /* padding: 5px; */
+    border: 1px dashed #e2e2e2;
+}
+.table-calendar {
+    /* padding: 5px; */
+    border-right: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom:  1px solid #000;
+}
+
+.table-calendar th{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    /* border: 1px dashed gray */
+}
+.table-calendar > caption{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}

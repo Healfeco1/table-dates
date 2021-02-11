@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>M22 Calendario</title>
+</head>
+
+<body>
+    <form class="dates">
+        <label>Fechas</label>
+        <hr>
+        <input id="startDate" name="startDate" type="month" placeholder="Inicio">
+        <input id="endDate" name="endDate" type="month" placeholder="Fin">
+        <select name="selectDate" id="selectDate"></select>
+        <button id="send" type="submit">Enviar</button>
+    </form>
+    <div id="container">
+        <table id="datesTable" class="table"></table>
+        <table id="dvTable" class="table"></table>
+    </div>
+
+    <script src="index.js"></script>
+    <!-- <script src="calendar.js"></script> -->
+    <script src="calendar.js"></script>
+</body>
+
+</html>
