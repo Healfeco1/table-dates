@@ -17,11 +17,11 @@ for(let i=1; i<=10; i++){
 }
 selectDate.selectedIndex = 0
 
+
 // onchange select
 selectDate.addEventListener("change", e => {
     if (cal.length>0) {
-        rows = generateRow(selectDate.value, cal.length);
-        showCalendar(rows);
+        showCalendar();
     }
 });
 
@@ -60,9 +60,15 @@ butonSend.addEventListener("click", e => {
 })
 
 function rang() {
-    dates = []
-    cal = []
+    dates = [];
+    cal = [];
+    [startYear, startmonth] = fechaInicio.value.split('-');
+    dStart = new Date(startYear, parseInt(startmonth));
+    [endYear, endmonth] = fechaFin.value.split('-');
+    // Changed
+    dEnd = new Date(endYear, parseInt(endmonth));
     let calendars = diffDates(dStart, dEnd);
+    console.log(calendars);
     for (dStart; dStart <= dEnd; dStart.setMonth(dStart.getMonth() + 1)) {
         if(dStart.getMonth()==0){
             // When month = 0 (December) show a year more on date
@@ -79,8 +85,7 @@ function rang() {
     }
 
     // Calculate the rows to print the table-calendar where the all calendars will be shown
-    rows = generateRow(selectDate.value, cal.length);
-    showCalendar(rows);
+    showCalendar();
 }
 
 // Create table month exa: (Julio 2021) and return the HTML table code
@@ -166,8 +171,8 @@ function createMonth(month, year) {
 function diffDates(d1, d2) {
     var d1Y = d1.getFullYear();
     var d2Y = d2.getFullYear();
-    var d1M = d1.getMonth();
-    var d2M = d2.getMonth();;
+    var d1M = d1.getMonth()-1;
+    var d2M = d2.getMonth()-1;
     return (d2M + 12 * d2Y) - (d1M + 12 * d1Y);
 }
 
@@ -207,18 +212,22 @@ function getNamesWeek(month, year) {
 function generateRow(columns, calendars) {
     console.log("calendars: " + calendars);
     let res = 0
-    for (let i = 0; i < 20; i++) {
-        res = columns * i;
-        if (res >= calendars) {
-            let restCell = res - calendars;
-            return i
+    if (columns == 1) {
+        return calendars
+    }else{
+        for (let i = 0; i < calendars; i++) {
+            res = columns * i;
+            if (res >= calendars) {
+                let restCell = res - calendars;
+                return i
+            }
         }
     }
 }
 
 // Create the table-calendar where the all calendars will be shown
-function showCalendar(rows) {
-    // Create cells table
+function showCalendar() {
+    rows = generateRow(selectDate.value, cal.length);
     var a = 0;
     let output = `<table cellspacing="7" cellpadding="5" class="table all-dates">`
         for (var i = 0; i < rows; i++) {
@@ -265,23 +274,3 @@ function printTable(tableName){
         }
     }
 }
-
-//   ip
-fetch('https://api.ipify.org/?format=json')
-    .then(ip => ip.json())
-    .then(({ip}) => {
-        console.log(ip);
-        address = ip
-        fetch(`https://api.astroip.co/${ip}/?api_key=1725E47C-1486-4369-AAFF-463CC9764026`)
-        .then(res => res.json())
-        .then((out) => {
-            let message = '';
-            let date = new Date(out.timezone.date_time);
-            let currentDate = new Date (Date.now());
-            // date = date.getDate() + "-"+ date.getMonth()+ "-" +date.getFullYear();
-            console.log(date);
-            message = `${date.toLocaleString('default', { day: '2-digit', month: 'long', year: 'numeric'})} - ${date.toLocaleString('default', {hour: '2-digit', minute: '2-digit', second: '2-digit' })} - ${out.requester_ip} - ${date.toLocaleString('default', { day: '2-digit', month: 'long', year: 'numeric'})} - ${currentDate.toLocaleString('default', { day: '2-digit', month: 'long', year: 'numeric'})}`
-            console.log('Output: ', out);
-            console.log('Output: ', message);
-        }).catch(err => console.error(err));
-}).catch(err => console.error(err));
