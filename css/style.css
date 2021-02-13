@@ -1,13 +1,8 @@
-body{
-    text-transform: lowercase;
-}
 table{
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    overflow-x: auto;
-    width: 100%;
-    border-collapse: collapse;
+    text-transform: lowercase;
 }
 .table-calendar{
     text-align: center;
@@ -16,7 +11,7 @@ table{
     font-size: 12px;
 }
 .table-calendar td {
-    border: 1px dashed #e2e2e2;
+    border: 1px dashed #0c0c0c2a;
 }
 .table-calendar {
     border-right: 1px solid #000;
@@ -33,4 +28,9 @@ table{
     background-color: white;
     color: black;
     font-weight: bold;
+    border: 1px dashed #0c0c0c2a;
+}
+
+#container{
+    overflow-x: auto;
 }
