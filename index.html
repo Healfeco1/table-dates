@@ -5,17 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
     <title>M22 Calendario</title>
 </head>
 
 <body>
     <label>Fechas</label>
     <hr>
-    <form class="dates">
-        <input id="startDate" name="startDate" type="month" placeholder="Inicio">
-        <input id="endDate" name="endDate" type="month" placeholder="Fin">
+    <form class="dates" name="dates">
+        <input id="startDate" name="startDate" type="text" placeholder="Inicio">
+        <input id="endDate" name="endDate" type="text" placeholder="Fin">
         <select name="selectDate" id="selectDate"></select>
         <button id="send" type="submit">Enviar</button>
     </form>

@@ -1,7 +1,3 @@
-// Node.js program to demonstrate the    
-// fs.mkdir() Method 
-  
-// Include fs and path module 
 const fs = require('fs'); 
 const path = require('path');  
 const dir = '../calendario'

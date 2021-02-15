@@ -1,7 +1,7 @@
 table{
-    text-align: center;
+    /* text-align: center; */
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
     text-transform: lowercase;
 }
 .table-calendar{
@@ -33,4 +33,8 @@ table{
 
 #container{
     overflow-x: auto;
+    margin: 0 auto;
+    width: 92%;
+    height: 700px;
+
 }
