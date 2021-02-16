@@ -58,19 +58,9 @@ function formtDate(e){
     // alert(e.target.value);
     let val = e.target.value;
     let add = '-'
-    // let result = [val.slice(0, 4), add, val.slice(2)].join('');
     return [val.slice(0, 2), add, val.slice(2)].join('')
-    // fechaInicio.value = [val.slice(0, 2), add, val.slice(2)].join('')
 }
-
-// fechaInicio.addEventListener("keypress", e => {
-//     let val = e.target.value;
-//     // let val = '-';
-//     if (e.target.value.length==2) {
-//         fechaInicio.value += [val.slice(0, 2), '-', val.slice(2)].join('')
-//     }
-//     console.log(e.target.value.length);
-// })
+let res = '';
 
 fechaInicio.addEventListener("change", e => {
     let val;
@@ -80,7 +70,7 @@ fechaInicio.addEventListener("change", e => {
         [startmonth,startYear] = e.target.value.split('-');
         // Changed
         // dStart = new Date(startYear, parseInt(startmonth));
-        dStart = new Date(startmonth,startYear);
+        dStart = new Date(startYear,startmonth);
         // dStart = createDate(startmonth,startYear);
     }
 });
@@ -91,16 +81,19 @@ fechaFin.addEventListener("change", e => {
         fechaFin.value = val;
         [endmonth,endYear] = e.target.value.split('-');
         // Changed
-        dEnd = new Date(endmonth,endYear);
-        // dEnd = createDate(parseInt(endmonth),endYear);
+        // dEnd = createDate(endmonth,endYear);
+        // dEnd = createDate(parseInt(endmoth),endYear);
+        dEnd = new Date(endYear, endmonth)
     }
 });
 
 // Form operations
 butonSend.addEventListener("click", e => {
     e.preventDefault();
+    // dStart = new Date(startYear, startmonth);
+    // dEnd = new Date (endYear,endmonth);
     // while(validateNumber){
-        if ((new Date (endmonth, endYear)) >= (new Date(startmonth, startYear))) {
+        if ( dEnd >= dStart) {
         // if (fechaFin.value >= fechaInicio.value) {
             let n = 0
             let dif = endmonth - startmonth;
@@ -113,8 +106,14 @@ butonSend.addEventListener("click", e => {
             }
             rang()
         // } else if (endYear == startYear) {
-        }else {
-            alert(`Fecha de incio: ${getMonthName(startmonth)} ${startYear} debe ser menor a fecha final: ${getMonthName(endmonth)} ${endYear}`)
+        }
+        else 
+        {
+            // alert(`Fecha de incio: ${getMonthName(startmonth)} ${startYear} debe ser menor a fecha final: ${getMonthName(endmonth)} ${endYear}`)
+             let starDate = createDate(startmonth, startYear)
+             let endDate = createDate(endmonth, endYear)
+            alert(`Fecha de incio: ${starDate.toLocaleString('default', { month: 'long', year: 'numeric' })} debe ser menor a fecha final: ${endDate.toLocaleString('default', { month: 'long', year: 'numeric' })}`)
+            
         }
     // }
     
@@ -123,13 +122,16 @@ butonSend.addEventListener("click", e => {
 function rang() {
     dates = [];
     cal = [];
-    [startYear, startmonth] = fechaInicio.value.split('-');
+
+    // [startmonth, startYear] = fechaInicio.value.split('-');
+    // dStart = new Date(startmonth,startYear);
+
+    // [endmonth,endYear] = fechaFin.value.split('-');
+    // dEnd = new Date(endmonth,endYear);
+
     // dStart = new Date(startYear, parseInt(startmonth));
-    dStart = new Date(startmonth,startYear);
-    [endYear, endmonth] = fechaFin.value.split('-');
     // Changed
     // dEnd = new Date(endYear, parseInt(endmonth));
-    dEnd = new Date(endmonth,endYear);
     let calendars = diffDates(dStart, dEnd);
     console.log(calendars);
     for (dStart; dStart <= dEnd; dStart.setMonth(dStart.getMonth() + 1)) {
@@ -139,6 +141,7 @@ function rang() {
         } else {
             dates.push(dStart.getMonth() + '-' + dStart.getFullYear());
         }
+            // dates.push(dStart.getMonth() + '-' + dStart.getFullYear());
     }
     // Save the HTML calendar table exa: (Julio 2021) 
     for (date in dates) {
@@ -146,6 +149,7 @@ function rang() {
         var year = dates[date].split('-')[1]
         cal.push(createMonth(month, year));
     }
+    dStart = new Date(startYear,startmonth);
 
     // Calculate the rows to print the table-calendar where the all calendars will be shown
     showCalendar();
@@ -240,10 +244,8 @@ function diffDates(d1, d2) {
 }
 
 function createDate(month, year) {
-    let date = new Date(parseInt(year), parseInt(month), 0);
+    let date = new Date(year, month, 0);
     // return (date.toLocaleString('default', { month: 'long' }));
-    // console.log(date.getFullYear());
-    // console.log(date.getMonth());
     return date
 }
 
@@ -275,7 +277,7 @@ function getNamesWeek(month, year) {
 function generateRow(columns, calendars) {
     console.log("calendars: " + calendars);
     let res = 0
-    if (columns == 1) {
+    if ((calendars == 1 && columns != 0) || (columns == 1)) {
         return calendars
     } else {
         for (let i = 0; i < calendars; i++) {
